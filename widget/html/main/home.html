@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>AUI快速完成布局</title>
+    <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../../css/aui-flex.css" /> -->
+    <link rel="stylesheet" type="text/css" href="../../css/aui-slide.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/swiper.min.css" />
+    <style type="text/css">
+        html,body{
+          background: #FEFEFE;
+          color: #6F6F6F
+        }
+        img.icon {
+            display: block;
+            margin: 0 auto;
+            width: 50%;
+        }
+        .header{
+          position: fixed;
+          top: 0;
+          z-index: 1;
+          background: rgba(255,255,255,0.2);
+          width: 100%;
+        }
+        .header_div{
+          margin: 10px;
+          background: rgba(255,255,255,0.8);
+          border-radius: 15px;
+        }
+        .header_div input{
+          height: 28px;
+          font-size: 12px;
+          text-align: center;
+        }
+        .aui-grid-label {
+            padding-top: 0.5rem;
+            font-size: 0.7rem !important;
+        }
+        .goods-item {
+            border: 1px solid #eee;
+            text-align: center;
+            padding: 0.5rem;
+        }
+        .goods-item img {
+            display: block;
+            width: 100%;
+            height: 7rem;
+        }
+        .title {
+            color: #666;
+            font-size: 0.8rem;
+            text-align: center;
+            /*background: url(../../image/jingpin_03.png) no-repeat;*/
+        }
+        .title p {
+            font-size: 0.6rem;
+            color: #ccc;
+        }
+        .goods-title {
+            font-size: 0.7rem;
+            color: #333 !important;
+
+        }
+        .small-ti{
+            margin: 10px;
+        }
+        .hot img {
+            width: 3rem;
+            display: block;
+            margin: 0 auto;
+        }
+        .detail{
+          margin: 0px 10px 10px;
+          border-radius: 10px;
+          box-shadow: 0px 6px 20px rgba(0,0,0,0.1);
+          border: 1px solid #eee;
+        }
+        .tip{
+          padding: 12px 10px 5px;
+          border-bottom: 1px solid #F4F4F4;
+          font-size: 13px;
+          background: url(../../image/bian.png) no-repeat;
+          background-position: 0 -16px;
+          background-size: 100% 100%;
+        }
+        .tip_left{
+          float: right;
+          color:#FFC8C8;
+        }
+        .aui-grid [class*=aui-col-] {
+          padding: 0;
+        }
+        .aui-grid .aui-grid-label{
+          margin-top: -4px;
+          font-size: 12px;
+          margin-bottom: 10px;
+        }
+        .aui-grid-label{
+          font-size: 13px;
+        }
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #9F1720;
+            width: 25px;
+            border-radius: 30%;
+            transition: width 0.3s;
+            /*transition: background 0.3s;*/
+        }
+        .aui-border-r {
+            border-right: 1px solid #DDDDDD;
+        }
+        .aui-border-b {
+            border-bottom: 2px solid #F4F4F4;
+        }
+        .aui-col-xs-3 {
+            width: 25%;
+            height: 3.8rem;
+        }
+      .hu{
+        width: 100%;
+        border: 1px solid white;
+        background: white;
+        height: 25px;
+        position: relative;
+        top: -14px;
+        z-index: 99;
+        border-radius: 600%;
+      }
+      .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+        bottom: 15px;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+      }
+    </style>
+</head>
+<body>
+    <div class="swiper-container">
+       <div class="swiper-wrapper">
+           <div class="swiper-slide">
+             <img src="../../image/index_ad_11.jpg" alt="">
+           </div>
+           <div class="swiper-slide">
+             <img src="../../image/index_ad_12.jpg" alt="">
+           </div>
+           <div class="swiper-slide">
+             <img src="../../image/index_ad_13.jpg" alt="">
+           </div>
+           <div class="swiper-slide">
+             <img src="../../image/index_ad_14.jpg" alt="">
+           </div>
+       </div>
+       <div class="swiper-pagination"></div>
+       <div class="hu"></div>
+   </div>
+
+
+
+
+    <section class="aui-content aui-margin-b-15 detail">
+        <div class="aui-grid aui-padded-l-10 aui-padded-r-10" style="background-color: rgba(159,23,32,0.1);">
+            <div class="tip">给您的专属分类 <span class="tip_left">每日分类</span></div>
+            <div class="aui-row aui-row-padded" style="padding:5px;">
+                <!-- <p class="small-ti">分类一</p> -->
+                <div class="aui-col-xs-3" >
+                    <img src="../../image/index_fenlei_01.png" class="icon">
+                    <div class="aui-grid-label">母婴</div>
+                </div>
+                <div class="aui-col-xs-3">
+                    <img src="../../image/index_fenlei_02.png" class="icon">
+                    <div class="aui-grid-label">美妆</div>
+                </div>
+                <div class="aui-col-xs-3">
+                    <img src="../../image/index_fenlei_03.png" class="icon">
+                    <div class="aui-grid-label">居家</div>
+                </div>
+                <div class="aui-col-xs-3">
+                    <img src="../../image/index_fenlei_04.png" class="icon">
+                    <div class="aui-grid-label">美食</div>
+                </div>
+                <div class="aui-col-xs-3">
+                    <img src="../../image/index_fenlei_06.png" class="icon">
+                    <div class="aui-grid-label">女装</div>
+                </div>
+                <div class="aui-col-xs-3">
+                    <img src="../../image/index_fenlei_07.png" class="icon">
+                    <div class="aui-grid-label">男装</div>
+                </div>
+                <div class="aui-col-xs-3">
+                    <img src="../../image/index_fenlei_08.png" class="icon">
+                    <div class="aui-grid-label">数码</div>
+                </div>
+                <div class="aui-col-xs-3" onclick="openWin()">
+                    <img src="../../image/index_fenlei_09.png" class="icon">
+                    <div class="aui-grid-label">鞋包</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="aui-content aui-margin-b-15 detail" style="background-color: #fff;">
+        <div class="aui-row aui-row-padded hot" style="background-color: rgba(159,23,32,0.1);">
+            <div class="aui-col-xs-4 aui-padded-15 aui-border-r k-style-flex" style="height: 10rem;">
+                <h3 class="aui-text-danger">淘抢购</h3>
+                <p>可爱的你会喜欢</p>
+                <img src="../../image/f1.png" style="width: 4.5rem;">
+            </div>
+            <div class="aui-col-xs-8 aui-padded-b-0 aui-padded-l-0">
+                <div class="aui-col-xs-12 aui-border-b" style="overflow: hidden; height: 4rem">
+                    <div class="aui-col-xs-9">
+                        <h3 class="aui-text-info">有好货</h3>
+                        <p>好品味从挑剔开始</p>
+                    </div>
+                    <div class="aui-col-xs-3"><img style="position:relative;    left: -32px;top: 10px;" src="../../image/f2.png"></div>
+                </div>
+                <div class="aui-col-xs-6 aui-border-r" style="height: 5.875rem;">
+                    <h5 class="aui-text-warning">爱逛街</h5>
+                    <p>疯狂赛车来袭</p>
+                    <img src="../../image/f3.png">
+                </div>
+                <div class="aui-col-xs-6">
+                    <h5 class="aui-text-success">必买清单</h5>
+                    <p>都帮你整理好啦</p>
+                    <img src="../../image/f5.png">
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="aui-content">
+        <div class="aui-card-list">
+            <div class="aui-card-list-header">
+                <div></div>
+                <div class="title">
+                    /&nbsp;&nbsp;精品推荐&nbsp;&nbsp;/
+                    <p>Recommend</p>
+                </div>
+                <div></div>
+            </div>
+            <div class="aui-card-list-content-padded">
+                <div class="aui-row aui-row-padded">
+                    <div class="aui-col-xs-6" onclick="openTaobao(this)">
+                        <div class=" goods-item">
+                            <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg">
+                            <p class="aui-border-t aui-margin-t-10 aui-padded-t-10 goods-title aui-ellipsis-2">Apple iPhone 7 128G 红色特别版 移动联通电信4G手机</p>
+                            <p class="aui-padded-t-5">积分：<span class="aui-text-danger">888</span></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<!-- <script type="text/javascript" src="../../script/aui-slide.js"></script> -->
+<script type="text/javascript" src="../../script/swiper.min.js"></script>
+<script>
+// swiper 方案1轮播
+   var swiper = new Swiper('.swiper-container', {
+       pagination: '.swiper-pagination',
+       paginationClickable: true,
+       spaceBetween: 30,
+       effect : 'fade',
+       loop:true,
+       centeredSlides: true,
+       autoplay: 2500,
+       autoplayDisableOnInteraction: false
+   });
+
+   </script>
+   <script type="text/javascript">
+
+
+
+   function openTaobao(obj){
+     	/* 体验微信分享模块. */
+ 		api.confirm({
+ 			"title": "体验 淘宝 分享功能",
+ 			"msg": "分享APICloud端API传奇到朋友圈...",
+ 			"buttons": ["残忍拒绝", "立即分享"]
+ 		}, function(ret, err){
+      // console.log(ret)
+      // console.log(err)
+ 			if(2 == ret.buttonIndex){
+        // api.alert(成功！)
+ 				follow();
+ 			}
+ 		})
+    function follow(){
+      var aliTradePlus = api.require('aliTradePlus');
+            aliTradePlus.initSDK({
+             isVVersion: '',
+             isVCode: ''
+            },function(ret, err){
+              console.log(ret)
+              // if(ret.status){
+              //     alert(JSON.stringify(ret));
+              // } else {
+              //     alert(JSON.stringify(err));
+              // }
+            });
+        // var weiXin = api.require('weiXin');
+        // weiXin.registerApp({
+        //     appId: 'wxd0d84bbf23b4a0e4'
+        // }, function(ret, err) {
+        //     if (!ret.status) {// 应用注册失败
+        //   api.alert({
+        //     "title": "分享失败",
+        //     "msg": "您可手动关注我们的公众账号:APICloud",
+        //     "buttons": ["确定"]
+        //   }, function(ret, err){
+        //
+        //   });
+        //
+        //   return;
+        //     }
+        // /*发布微信分享*/
+        //   weiXin.sendRequest({
+        //       scene: "timeline",
+        //       contentType: "web_page",
+        //       title:"APICloud全球首家完美兼容iPhone6，有图有真相~~",
+        //       description: "iOS8崩溃吗？iPhone6适配了吗？APICloud全球首家完美兼容iPhone6，有图有真相~~",
+        //       thumbUrl: "http://mmbiz.qpic.cn/mmbiz/lp6euAmKsAFS1YTWZSyvDBmA4JkibHqlKzDVEWQRbpiagddy5uXdHkM6CgXpNPHhibco5uIemWul9pSaUD9JxpC5Q/0",
+        //       contentUrl: "http://mp.weixin.qq.com/s?__biz=MzA3MTk3MTQyMQ==&mid=200555999&idx=1&sn=ceb2ca5f93906aff3ba0339c7abf2488#rd"
+        //
+        //   }, function(ret, err) {
+        //       if ( ! ret.status) {
+        //           api.alert({
+        //               title: '分享失败',
+        //               msg: '您可手动关注我们的公众账号:APICloud',
+        //               buttons: ['确定']
+        //           });
+        //       } else {
+        //           api.alert({
+        //               title: '分享成功',
+        //               msg: '感谢您对我们的支持!',
+        //               buttons: ['确定']
+        //           });
+        //       };
+        //   });
+        // });
+
+    }
+  //  var aliTradePlus = api.require('aliTradePlus');
+  //       aliTradePlus.initSDK({
+  //        isVVersion: '',
+  //        isVCode: ''
+  //       },function(ret, err){
+  //         {
+  //             status : true // 布尔类型；是否初始化成功
+  //         }
+  //         {
+  //             code:0,      // 数字类型；错误码
+  //             msg:''       // 字符串；错误提示信息
+  //         }
+  //         if(ret.status){
+  //             alert(JSON.stringify(ret));
+  //         } else {
+  //             alert(JSON.stringify(err));
+  //         }
+  //       });
+  }
+     function openWin(){
+       api.openWin({
+           name: '1haodoan',
+           url: 'https://m.yhd.com/?tracker_u=10498211440',
+           pageParam: {
+
+           },
+           rect: {
+               x: 0,
+               y: 0,
+               w: 'auto',
+               h: 'auto'
+           }
+       });
+     }
+   </script>
+
+</html>
