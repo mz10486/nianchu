@@ -295,12 +295,23 @@
              isVVersion: '',
              isVCode: ''
             },function(ret, err){
-              console.log(ret)
+              // console.log(ret)
               // if(ret.status){
               //     alert(JSON.stringify(ret));
               // } else {
               //     alert(JSON.stringify(err));
               // }
+            });
+            aliTradePlus.showItemDetailPage({
+                itemId: '548562606542',
+                taokePid: 'mm_45330988_25892252_159290751',
+                openType: 'native'
+            },function(ret, err){
+                if(ret.status){
+                    alert(JSON.stringify(ret));
+                } else {
+                    alert(JSON.stringify(err));
+                }
             });
         // var weiXin = api.require('weiXin');
         // weiXin.registerApp({
