@@ -291,17 +291,7 @@
  		})
     function follow(){
       var aliTradePlus = api.require('aliTradePlus');
-            aliTradePlus.initSDK({
-             isVVersion: '',
-             isVCode: ''
-            },function(ret, err){
-              // console.log(ret)
-              // if(ret.status){
-              //     alert(JSON.stringify(ret));
-              // } else {
-              //     alert(JSON.stringify(err));
-              // }
-            });
+      var weiXin = api.require('weiXin');
             aliTradePlus.showItemDetailPage({
                 itemId: '548562606542',
                 taokePid: 'mm_45330988_25892252_159290751',
@@ -312,6 +302,29 @@
                 } else {
                     alert(JSON.stringify(err));
                 }
+            });
+            weiXin.sendRequest({
+                scene: "timeline",
+                contentType: "web_page",
+                title:"APICloud全球首家完美兼容iPhone6，有图有真相~~",
+                description: "iOS8崩溃吗？iPhone6适配了吗？APICloud全球首家完美兼容iPhone6，有图有真相~~",
+                thumbUrl: "http://mmbiz.qpic.cn/mmbiz/lp6euAmKsAFS1YTWZSyvDBmA4JkibHqlKzDVEWQRbpiagddy5uXdHkM6CgXpNPHhibco5uIemWul9pSaUD9JxpC5Q/0",
+                contentUrl: "http://mp.weixin.qq.com/s?__biz=MzA3MTk3MTQyMQ==&mid=200555999&idx=1&sn=ceb2ca5f93906aff3ba0339c7abf2488#rd"
+
+            }, function(ret, err) {
+                if ( ! ret.status) {
+                    api.alert({
+                        title: '分享失败',
+                        msg: '您可手动关注我们的公众账号:APICloud',
+                        buttons: ['确定']
+                    });
+                } else {
+                    api.alert({
+                        title: '分享成功',
+                        msg: '感谢您对我们的支持!',
+                        buttons: ['确定']
+                    });
+                };
             });
         // var weiXin = api.require('weiXin');
         // weiXin.registerApp({

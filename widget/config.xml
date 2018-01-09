@@ -19,7 +19,7 @@
 	<preference name="autoUpdate" value="true" />
 	<preference name="smartUpdate" value="false" />
 	<preference name="debug" value="true"/>
-	<preference name="statusBarAppearance" value="true"/>
+	<preference name="statusBarAppearance" value="true"/>  <preference name="urlScheme" value="tbopen24757742"/>  <preference name="querySchemes" value="tbopen,tmall"/>
 	<permission name="readPhoneState" />
 	<permission name="camera" />
 	<permission name="record" />
@@ -27,5 +27,5 @@
 	<permission name="fileSystem" />
 	<permission name="internet" />
 	<permission name="bootCompleted" />
-	<permission name="hardware" />  <feature name="aliTradePlus">    <preference name="urlScheme" value="tbopen24757742"/>    <preference name="querySchemes" value="tbopen,tmall"/>  </feature>
+	<permission name="hardware" />  <feature name="weiXin">    <param name="urlScheme" value="wx8a979365721f511f"/>    <param name="apiKey" value="wx8a979365721f511f"/>  </feature>
 </widget>
