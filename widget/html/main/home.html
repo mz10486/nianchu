@@ -136,6 +136,10 @@
         width: 100%;
         z-index: 100;
       }
+      .aui-ellipsis-2 {
+          /* -webkit-line-clamp: 2; */
+              padding: 0 5px;
+      }
     </style>
 </head>
 <body>
@@ -240,23 +244,20 @@
                 <div></div>
             </div>
             <div class="aui-card-list-content-padded">
-                <div class="aui-row aui-row-padded">
-                    <div class="aui-col-xs-6" onclick="openTaobao(this)">
-                        <div class=" goods-item">
-                            <img src="http://img10.360buyimg.com/n1/s450x450_jfs/t4276/257/2416766721/125228/ba72a107/58d1d078N20e18b62.jpg">
-                            <p class="aui-border-t aui-margin-t-10 aui-padded-t-10 goods-title aui-ellipsis-2">Apple iPhone 7 128G 红色特别版 移动联通电信4G手机</p>
-                            <p class="aui-padded-t-5">积分：<span class="aui-text-danger">888</span></p>
-                        </div>
-                    </div>
+                <div class="aui-row aui-row-padded aui-con">
 
                 </div>
             </div>
         </div>
     </div>
 </body>
+<input type="hidden" id='meijian' value="">
 <script type="text/javascript" src="../../script/api.js"></script>
 <!-- <script type="text/javascript" src="../../script/aui-slide.js"></script> -->
 <script type="text/javascript" src="../../script/swiper.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.js">
+
+</script>
 <script>
 // swiper 方案1轮播
    var swiper = new Swiper('.swiper-container', {
@@ -273,119 +274,141 @@
    </script>
    <script type="text/javascript">
 
+  //ajax请求首页数据
+  $.ajax({
+  type: 'POST',
+  url: 'http://mksq.nianchu.net/',
+  // post payload:
+  data: JSON.stringify({ 'server': 'demo.nianchu.net' ,'password':'1510401384337'}),
+  contentType: 'application/json',
+  success: function(data){
+    var data=$.parseJSON(data).data
+    // console.log(data);
 
+    $('#meijian').val(data);
+    var meijian=$('#meijian').val();
+    var result=''
+      $.ajax({
+      type: 'POST',
+      url: 'http://mksq.nianchu.net/index.php/cloud/DongdongData/collectDongDong?time=10',
+      headers:{'author':meijian},
+      // post payload:
+      contentType: 'application/json',
+      success: function(data){
+        var data=$.parseJSON(data).data
+        var arrlen=data.length;
+        //  console.log(data[0].itempic)
 
-   function openTaobao(obj){
-     	/* 体验微信分享模块. */
- 		api.confirm({
- 			"title": "体验 淘宝 分享功能",
- 			"msg": "分享APICloud端API传奇到朋友圈...",
- 			"buttons": ["残忍拒绝", "立即分享"]
- 		}, function(ret, err){
-      // console.log(ret)
-      // console.log(err)
- 			if(2 == ret.buttonIndex){
-        // api.alert(成功！)
- 				follow();
- 			}
- 		})
-    function follow(){
-      var aliTradePlus = api.require('aliTradePlus');
-      var weiXin = api.require('weiXin');
-            aliTradePlus.showItemDetailPage({
-                itemId: '548562606542',
-                taokePid: 'mm_45330988_25892252_159290751',
-                openType: 'native'
-            },function(ret, err){
-                if(ret.status){
-                    alert(JSON.stringify(ret));
-                } else {
-                    alert(JSON.stringify(err));
-                }
-            });
-            weiXin.sendRequest({
-                scene: "timeline",
-                contentType: "web_page",
-                title:"APICloud全球首家完美兼容iPhone6，有图有真相~~",
-                description: "iOS8崩溃吗？iPhone6适配了吗？APICloud全球首家完美兼容iPhone6，有图有真相~~",
-                thumbUrl: "http://mmbiz.qpic.cn/mmbiz/lp6euAmKsAFS1YTWZSyvDBmA4JkibHqlKzDVEWQRbpiagddy5uXdHkM6CgXpNPHhibco5uIemWul9pSaUD9JxpC5Q/0",
-                contentUrl: "http://mp.weixin.qq.com/s?__biz=MzA3MTk3MTQyMQ==&mid=200555999&idx=1&sn=ceb2ca5f93906aff3ba0339c7abf2488#rd"
+        for (var i = 0; i < arrlen; i++) {
+          result += '<div class="aui-col-xs-6 " onclick="openTaobao(this)">'
+                    +'<input type="hidden" value="'+data[i].itemid+'" id="itemid">'
+                    +'<div class=" goods-item">'
+                    +'<img src="'+data[i].itempic+'">'
+                    +'<p class="aui-border-t aui-margin-t-10 aui-padded-t-10 goods-title aui-ellipsis-2">'+data[i].d_title+'</p>'
+                    +'<p class="aui-padded-t-5">原价：<span class="aui-text-danger">'+data[i].itemfee+'</span></p>'
+                    +'<p class="aui-padded-t-5">券价：<span class="aui-text-danger">'+(data[i].itemfee-data[i].itemfee2).toFixed(0)+'</span></p>'
+                    +'</div>'
+                    +'</div>'
+        }
+        $('.aui-con').append(result);
 
-            }, function(ret, err) {
-                if ( ! ret.status) {
-                    api.alert({
-                        title: '分享失败',
-                        msg: '您可手动关注我们的公众账号:APICloud',
-                        buttons: ['确定']
-                    });
-                } else {
-                    api.alert({
-                        title: '分享成功',
-                        msg: '感谢您对我们的支持!',
-                        buttons: ['确定']
-                    });
-                };
-            });
-        // var weiXin = api.require('weiXin');
-        // weiXin.registerApp({
-        //     appId: 'wxd0d84bbf23b4a0e4'
-        // }, function(ret, err) {
-        //     if (!ret.status) {// 应用注册失败
-        //   api.alert({
-        //     "title": "分享失败",
-        //     "msg": "您可手动关注我们的公众账号:APICloud",
-        //     "buttons": ["确定"]
-        //   }, function(ret, err){
-        //
-        //   });
-        //
-        //   return;
-        //     }
-        // /*发布微信分享*/
-        //   weiXin.sendRequest({
-        //       scene: "timeline",
-        //       contentType: "web_page",
-        //       title:"APICloud全球首家完美兼容iPhone6，有图有真相~~",
-        //       description: "iOS8崩溃吗？iPhone6适配了吗？APICloud全球首家完美兼容iPhone6，有图有真相~~",
-        //       thumbUrl: "http://mmbiz.qpic.cn/mmbiz/lp6euAmKsAFS1YTWZSyvDBmA4JkibHqlKzDVEWQRbpiagddy5uXdHkM6CgXpNPHhibco5uIemWul9pSaUD9JxpC5Q/0",
-        //       contentUrl: "http://mp.weixin.qq.com/s?__biz=MzA3MTk3MTQyMQ==&mid=200555999&idx=1&sn=ceb2ca5f93906aff3ba0339c7abf2488#rd"
-        //
-        //   }, function(ret, err) {
-        //       if ( ! ret.status) {
-        //           api.alert({
-        //               title: '分享失败',
-        //               msg: '您可手动关注我们的公众账号:APICloud',
-        //               buttons: ['确定']
-        //           });
-        //       } else {
-        //           api.alert({
-        //               title: '分享成功',
-        //               msg: '感谢您对我们的支持!',
-        //               buttons: ['确定']
-        //           });
-        //       };
-        //   });
-        // });
+        }
+      })
 
     }
-  //  var aliTradePlus = api.require('aliTradePlus');
-  //       aliTradePlus.initSDK({
-  //        isVVersion: '',
-  //        isVCode: ''
-  //       },function(ret, err){
-  //         {
-  //             status : true // 布尔类型；是否初始化成功
-  //         }
-  //         {
-  //             code:0,      // 数字类型；错误码
-  //             msg:''       // 字符串；错误提示信息
-  //         }
-  //         if(ret.status){
-  //             alert(JSON.stringify(ret));
-  //         } else {
-  //             alert(JSON.stringify(err));
-  //         }
-  //       });
+  })
+  //监听剪切板
+  var clipBoard = api.require('clipBoard');
+      clipBoard.setListener(function(ret, err) {
+          if (ret) {
+              alert(JSON.stringify(ret));
+          } else {
+              alert(JSON.stringify(err));
+          }
+      });
+
+   function openTaobao(obj){
+     var itemid=$(obj).children('#itemid').val();
+     api.openWin({
+         name: '商品详情',
+         url: '../detailWin/detail.html',
+         bounces: false,
+         pageParam: {
+           name: "detail",
+           title: "商品详情",
+           itemid:itemid
+         },
+         rect: {
+             x: 0,
+             y: 0,
+             w: 'auto',
+             h: 'auto'
+         }
+     });
+
+    // //  console.log($(obj).children('#itemid').val());
+    // var itemid=$(obj).children('#itemid').val();
+    //
+    //  	/* 体验微信分享模块. */
+ 	// 	api.confirm({
+ 	// 		"title": "体验 淘宝 分享功能",
+ 	// 		"msg": "分享APICloud端API传奇到朋友圈...",
+ 	// 		"buttons": ["残忍拒绝", "立即分享"]
+ 	// 	}, function(ret, err){
+    //   // console.log(ret)
+    //   // console.log(err)
+ 	// 		if(2 == ret.buttonIndex){
+    //     // api.alert(成功！)
+ 	// 			follow();
+ 	// 		}
+ 	// 	})
+    // function follow(){
+    //   var aliTradePlus = api.require('aliTradePlus');
+    //   // var aliTradePlus = api.require('aliTradePlus');
+    //   aliTradePlus.initSDK({
+    //      isVVersion: '',
+    //      isVCode: ''
+    //   },function(ret, err){
+    //       if(ret.status){
+    //           // alert(JSON.stringify(ret));
+    //       } else {
+    //           // alert(JSON.stringify(err));
+    //       }
+    //   });
+    //   //淘宝授权登陆
+    //   // aliTradePlus.showLogin(function(ret, err){
+    //   //        if (ret) {
+    //   //            alert(JSON.stringify(ret));
+    //   //        }else {
+    //   //             alert(JSON.stringify(err));
+    //   //        }
+    //   // });
+    //   //拉去手机淘宝
+    //         aliTradePlus.showItemDetailPage({
+    //             itemId:itemid,
+    //             taokePid: 'mm_31460582_20658145_70114869',
+    //             openType: 'native'
+    //         },function(ret, err){
+    //           if(ret.status){
+    //               // alert(JSON.stringify(ret));
+    //           } else {
+    //               // alert(JSON.stringify(err));
+    //           }
+    //           // if ( ! ret.status) {
+    //           //     api.alert({
+    //           //         title: '分享失败',
+    //           //         msg: '您可手动关注我们的公众账号:APICloud',
+    //           //         buttons: ['确定']
+    //           //     });
+    //           // } else {
+    //           //     api.alert({
+    //           //         title: '分享成功',
+    //           //         msg: '感谢您对我们的支持!',
+    //           //         buttons: ['确定']
+    //           //     });
+    //           // };
+    //         });
+    // }
   }
      function openWin(){
        api.openWin({
