@@ -318,14 +318,7 @@
     }
   })
   //监听剪切板
-  var clipBoard = api.require('clipBoard');
-      clipBoard.setListener(function(ret, err) {
-          if (ret) {
-              alert(JSON.stringify(ret));
-          } else {
-              alert(JSON.stringify(err));
-          }
-      });
+
 
    function openTaobao(obj){
      var itemid=$(obj).children('#itemid').val();

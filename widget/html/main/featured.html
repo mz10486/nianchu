@@ -242,7 +242,20 @@
 <script type="text/javascript" src="../../script/aui-slide.js"></script>
 <script type="text/javascript">
     apiready = function(){
+      function openVideo(){
+        var videoPlayer = api.require('videoPlayer');
+          videoPlayer.open({
+            path: 'http://7o50kb.com2.z0.glb.qiniucdn.com/c1.1.mp4',
+            scalingMode:'scaleToFill'
+          }, function(ret, err) {
+            if (ret.status) {
+                alert(JSON.stringify(ret));
+            } else {
+                alert(JSON.stringify(err));
+            }
+          });
+      };
+      }
 
-    };
 </script>
 </html>

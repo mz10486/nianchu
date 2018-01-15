@@ -36,7 +36,7 @@
                     <!-- followed -->
                     <!-- <span class="type"></span> -->
                 </div>
-                <div class="fun_follow_media">
+                <div class="fun_follow_media" onclick="openVideo(this);">
                     <img src="../../image/fun_follow_f2.png" alt="">
                     <img src="../../res/img/tm_btn_play.png" alt="" class="play_btn">
                 </div>
@@ -191,8 +191,19 @@
 <script type="text/javascript" src="../../script/api.js"></script>
 <script type="text/javascript" src="../../script/common.js"></script>
 <script type="text/javascript">
-    apiready = function(){
-
-    };
+      function openVideo(obj){
+          alert("111")
+        var videoPlayer = api.require('videoPlayer');
+          videoPlayer.open({
+            path: 'http://7o50kb.com2.z0.glb.qiniucdn.com/c1.1.mp4',
+            scalingMode:'scaleToFill'
+          }, function(ret, err) {
+            if (ret.status) {
+                alert(JSON.stringify(ret));
+            } else {
+                alert(JSON.stringify(err));
+            }
+          });
+      };
 </script>
 </html>

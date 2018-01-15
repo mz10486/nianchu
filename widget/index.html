@@ -162,6 +162,15 @@
        listBar.style.webkitTransform = 'translateX('+index*100+'%)';
        openIndexFrames(index);
    };
+  //  var clipBoard = api.require('clipBoard');
+  //   clipBoard.get(function(ret, err) {
+  //       if (ret) {
+  //           alert(JSON.stringify(ret));
+  //       } else {
+  //           alert(JSON.stringify(err));
+  //       }
+  //   });
+
 
    // 关注分类frame
    var openFeaturedFrame = function(){
@@ -283,6 +292,20 @@
    // 打开分享浮动窗口 end
 
    apiready = function(){
+    //首页监听检测板
+     setTimeout(function(){
+       var clipBoard = api.require('clipBoard');
+         clipBoard.get(function(ret, err) {
+            alert(JSON.stringify(ret.value))
+         });
+         api.addEventListener({
+              name:'resume'
+          }, function(ret, err){
+            clipBoard.get(function(ret, err) {
+               alert(JSON.stringify(ret.value))
+            });
+          });
+     },4000)
 
        // 阻止首页弹动
        api.setWinAttr({
